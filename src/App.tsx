@@ -23,7 +23,7 @@ export type RawNote = {
 export type RawNoteData = {
   title: string;
   markdown: string;
-  tags: string[];
+  tagIds: string[];
 };
 
 export type NoteData = {
@@ -56,12 +56,10 @@ function App() {
   }, [tags, notes]);
 
   function onCreateNote({ tags, ...data }: NoteData) {
-    setNotes((prevnotes) => {
-      return [
-        ...prevnotes,
-        { ...data, id: uuidV4(), tagIds: tags.map((tag) => tag.id) },
-      ];
-    });
+    setNotes((prevnotes) => [
+      ...prevnotes,
+      { ...data, id: uuidV4(), tagIds: tags.map((tag) => tag.id) },
+    ]);
   }
 
   function onUpdateTag(id: string, label: string) {
@@ -104,13 +102,19 @@ function App() {
   }
   //
 
-
   return (
     <Container className="my-4">
       <Routes>
         <Route
           path="/"
-          element={<NoteList avaialableTags={tags} Notes={notesWithTags} DeleteTag={DeleteTag} onUpdateTag={onUpdateTag} />}
+          element={
+            <NoteList
+              avaialableTags={tags}
+              Notes={notesWithTags}
+              DeleteTag={DeleteTag}
+              onUpdateTag={onUpdateTag}
+            />
+          }
         />
         <Route
           path="/new"
