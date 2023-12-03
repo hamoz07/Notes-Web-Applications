@@ -1,4 +1,3 @@
-import React from "react";
 import { useNote } from "./NoteLayout";
 import { Col, Row, Stack, Badge, Button } from "react-bootstrap";
 import GoBack from "./GoBack";
