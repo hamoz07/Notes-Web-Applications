@@ -20,4 +20,4 @@ export default NoteLayout
 
 export function useNote() {
     return useOutletContext<Note>()
-  }
+}
